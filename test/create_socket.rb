@@ -1,7 +1,8 @@
 require "socket"
 
-socket = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM)
+server = TCPServer.new 4481
 
-addr = Socket.pack_sockaddr_in(4481, '0.0.0.0')
-
-socket.bind addr
+Socket.accept_loop server do |con|
+  p con.class
+  con.close
+end
